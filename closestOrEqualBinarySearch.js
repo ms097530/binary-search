@@ -1,4 +1,4 @@
-function binarySearch(arr, left, right, val)
+function binarySearch(arr, val, options)
 {
     // arguments:
     // 1. arr = array of values to search

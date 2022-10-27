@@ -1,6 +1,7 @@
 // normal binary search
-function binarySearch(arr, left, right, val)
+function binarySearch(arr, val, options = { left: 0, right: arr.length - 1, order: 'asc' })
 {
+
     // arguments:
     // 1. arr = array of values to search
     // 2. left = left boundary
@@ -8,21 +9,46 @@ function binarySearch(arr, left, right, val)
     // 4. val = value to search for
     // return:
     // index of value if found, -1 if not found
+
+    // handling assigning default options in case a subset of options is provided
+    let left = options.left || 0
+    let right = options.right || arr.length - 1
+    let order = options.order || 'asc'
+
     let mid = Math.floor((left + right) / 2)
     while (left <= right)
     {
-        if (arr[mid] === val)
+        if (order === 'asc')
         {
-            found = true
-            return mid
+            if (arr[mid] === val)
+            {
+                found = true
+                return mid
+            }
+            if (arr[mid] < val)
+            {
+                left = mid + 1
+            }
+            if (arr[mid] > val)
+            {
+                right = mid - 1
+            }
         }
-        if (arr[mid] < val)
+        if (order === 'desc')
         {
-            left = mid + 1
-        }
-        if (arr[mid] > val)
-        {
-            right = mid - 1
+            if (arr[mid] === val)
+            {
+                found = true
+                return mid
+            }
+            if (arr[mid] > val)
+            {
+                left = mid + 1
+            }
+            if (arr[mid] < val)
+            {
+                right = mid - 1
+            }
         }
         mid = Math.floor((left + right) / 2)
     }
