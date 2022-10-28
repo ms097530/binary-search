@@ -1,13 +1,13 @@
 function binarySearch(arr, val, options = { left: 0, right: arr.length - 1, order: 'asc' })
 {
-
     // arguments:
     // 1. arr = array of values to search
-    // 2. left = left boundary
-    // 3. right = right boundary
-    // 4. val = value to search for
+    // 2. val = value to search for
+    // 3. options = object -> keys/values: left: INTEGER, right: INTEGER, order: 'asc' or 'desc'
     // return:
-    // index of value if found, index to insert at and maintain sorted order if not found
+    // IF FOUND, index of value if found
+    // IF NOT FOUND, index to insert at and maintain sorted order
+    // return value is UNDEFINED if arr is not sorted and/or the provided options.order does not match the actual sorting of arr
 
     // handling assigning default options in case a subset of options is provided
     let left = options.left || 0
@@ -78,9 +78,7 @@ function binarySearch(arr, val, options = { left: 0, right: arr.length - 1, orde
     // to insert while remaining sorted:
     // ascending - if in middle: index of the first (from left to right) value that is greater than val
     // descending - if in middle: index of the first (from left to right) value that is less than val 
-    // use left to navigate?
 
-    // [1,3,5,7,9,11]
     let insertIndex = left
     if (order === 'asc')
     // find first value in arr that is greater than val
@@ -91,10 +89,14 @@ function binarySearch(arr, val, options = { left: 0, right: arr.length - 1, orde
             while (insertIndex < arr.length)
             {
                 if (arr[insertIndex] > val)
+                {
                     // when traversing right, we stop at first valid value and return it
                     return insertIndex
+                }
                 else
+                {
                     ++insertIndex
+                }
             }
         }
         // traverse left - find first (left to right) instance of this value
@@ -104,10 +106,14 @@ function binarySearch(arr, val, options = { left: 0, right: arr.length - 1, orde
             while (insertIndex >= 0)
             {
                 if (arr[insertIndex] < val)
+                {
                     // when traversing left, all values are valid until entering this block, want first valid value, so must increment by 1 for return
                     return insertIndex + 1
+                }
                 else
+                {
                     --insertIndex
+                }
             }
         }
     }
@@ -120,10 +126,14 @@ function binarySearch(arr, val, options = { left: 0, right: arr.length - 1, orde
             while (insertIndex < arr.length)
             {
                 if (arr[insertIndex] < val)
+                {
                     // when traversing right, we stop at first valid value and return it
                     return insertIndex
+                }
                 else
+                {
                     ++insertIndex
+                }
             }
         }
         // traverse left - find first (left to right) instance of this value
@@ -132,14 +142,17 @@ function binarySearch(arr, val, options = { left: 0, right: arr.length - 1, orde
             while (insertIndex >= 0)
             {
                 if (arr[insertIndex] > val)
+                {
                     // when traversing left, all values are valid until entering this block, want first valid value, so must increment by 1 for return
                     return insertIndex + 1
+                }
                 else
+                {
                     --insertIndex
+                }
             }
         }
     }
-    // return insertIndex + 1
 }
 
 module.exports = binarySearch
