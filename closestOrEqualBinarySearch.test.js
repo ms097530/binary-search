@@ -121,7 +121,7 @@ test('odd length - in middle - value 8 not found - descending order', () =>
 {
     expect(binarySearch(descOddGapsRepeat, 8, { order: 'desc' })).toBe(3)
 })
-test('test', () =>
+test('evenlength - many repeated values - descending order', () =>
 {
     expect(binarySearch(descManyRepeats, 5, { order: 'desc' })).toBe(10)
 })
